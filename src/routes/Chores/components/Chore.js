@@ -45,6 +45,7 @@ export const Chore = (props) => {
       </div>
       <div className="chore-description">{props.description}</div>
       <div className="roommate-name">assigned to: {props.roommateName}</div>
+      <div ClassName="expiration-date">Expiration Date: {props.expirationDate}</div>
   <div className="assign-to-label">{() =>(this.hoverMessage())}</div>
     </div>
   );

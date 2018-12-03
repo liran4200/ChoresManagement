@@ -26,7 +26,7 @@ const initialState = {
             "name":             "Garbge",
             "description": "    Throwing away garbge every day",
             "createDate":       new Date(),
-            "expirationDate":   null,
+            "expirationDate":   "20/12/2018",
             "roommateName":     constants.UNASSIGNED_CHORE
         },
         {
@@ -34,7 +34,7 @@ const initialState = {
             "name":             "Kitchen",
             "description":      "Cleaning all the kitchen",
             "createDate":       new Date(),
-            "expirationDate":   null,
+            "expirationDate":   "12/12/2018",
             "roommateName":     constants.UNASSIGNED_CHORE
         },
         {
@@ -42,7 +42,7 @@ const initialState = {
             "name":             "Clean TV in living room",
             "description":      "Clean dast on TV with special metrial",
             "createDate":       new Date(),
-            "expirationDate":   null,
+            "expirationDate":   "14/12/2018",
             "roommateName":     "Liran Yehudar"
         },
         {
@@ -50,7 +50,7 @@ const initialState = {
             "name":             "Clean Nir room",
             "description":      "Cleaning desk",
             "createDate":       new Date(),
-            "expirationDate":   null,
+            "expirationDate":   "15/12/2018",
             "roommateName":     "Nir Finz"
         }
     ],
