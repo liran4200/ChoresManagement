@@ -37,15 +37,38 @@ export const Chore = (props) => {
     }
   }
 
+  const isExpiredDate = () => {
+    let now = new Date();
+    //set time to 0 in order to check only date
+    now.setHours(0, 0, 0, 0);
+    if(now > props.expirationDate)
+      return true;
+    return false;
+  }
+
+  //defualt background
+  let backgroundExpiredDate = '';
+  let backgroundChoreItem = '#00eeff';
+  if(isExpiredDate()){
+    //red
+    backgroundChoreItem = '#FF0000';
+    //white
+    backgroundExpiredDate = '#ffffff'
+  }
+
+
   return (
-    <div className="chore-item" onClick={(event)=>handleClick(event)}>
+    <div className="chore-item" style={{background: backgroundChoreItem}} onClick={(event)=>handleClick(event)}>
       <div className="title">
         <div className="chore-name">{props.name}</div>
         <input type="checkbox" name="" value="" ></input>
       </div>
       <div className="chore-description">{props.description}</div>
       <div className="roommate-name">assigned to: {props.roommateName}</div>
-      <div className="expiration-date">Expiration Date: {props.expirationDate}</div>
+      <div
+            style={{background: backgroundExpiredDate}}
+            className="expiration-date">Expiration Date: {props.expirationDate.toLocaleDateString("en-IL")}
+      </div>
       <div className="assign-to-label">{() => (this.hoverMessage())}</div>
     </div>
   );
