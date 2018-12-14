@@ -8,7 +8,14 @@ const ACTION_HANDLERS = {
   [constants.UPDATE_CHORE]    : (state, action) => {
     let choresList = state.choresList.filter((value)=>(value.id != action.payload.id))
     choresList.push(action.payload)
-    console.log(`the new arrat is ${JSON.stringify(choresList)}`)
+    console.log(`the new array is ${JSON.stringify(choresList)}`)
+    let toReturn = {...state,choresList}
+    console.log(`the new toReturn is ${JSON.stringify(toReturn)}`)
+    return {...state,choresList}
+    },
+  [constants.REMOVE_CHORE]    : (state, action) => {
+    let choresList = state.choresList.filter((chore)=>(chore.id != action.payload.id))
+    console.log(`the new array after removed is ${JSON.stringify(choresList)}`)
     let toReturn = {...state,choresList}
     console.log(`the new toReturn is ${JSON.stringify(toReturn)}`)
     return {...state,choresList}

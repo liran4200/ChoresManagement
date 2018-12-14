@@ -11,16 +11,20 @@ export const ChoresView = (props) => {
                 title="Unassigned Chores"
                 chores={props.unassignedChoresList}
                 updateChore={props.updateChore}
+                showBtnDone={false}
             />
             <ChoreList
                 title="My Chores"
                 chores={props.assignedToMeChoresList}
                 updateChore={props.updateChore}
+                removeChore={props.removeChore}
+                showBtnDone={true}
             />
             <ChoreList
                 title="Assigned Chores"
                 chores={props.assignedToOthersChoresList}
                 updateChore={props.updateChore}
+                showBtnDone={false}
             />
             <div className='chore-view_space'/>
         </div>

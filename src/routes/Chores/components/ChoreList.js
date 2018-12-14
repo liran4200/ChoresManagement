@@ -19,6 +19,8 @@ export const ChoreList = (props) => {
             expirationDate={chore.expirationDate}
             roommateName={chore.roommateName}
             updateChore={props.updateChore}
+            removeChore={props.removeChore}
+            showBtnDone={props.showBtnDone}
           />
         )
       })

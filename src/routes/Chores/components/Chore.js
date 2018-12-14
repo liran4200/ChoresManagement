@@ -15,7 +15,7 @@ export const createChore = (id, name, description, createDate, expirationDate, r
 }
 
 export const Chore = (props) => {
-  console.log(props)
+
   const handleClick = (event) => {
     let roommateName;
     if(props.roommateName === constants.UNASSIGNED_CHORE){
@@ -46,6 +46,12 @@ export const Chore = (props) => {
     return false;
   }
 
+  const onBtnDoneClick = () => {
+    console.log("btn done clicked")
+    props.removeChore(createChore(props.id, props.name, props.description,
+      props.createDate, props.expirationDate, props.roommateName));
+  }
+
   //defualt background
   let backgroundExpiredDate = '';
   let backgroundChoreItem = '#00eeff';
@@ -53,23 +59,38 @@ export const Chore = (props) => {
     //red
     backgroundChoreItem = '#FF0000';
     //white
-    backgroundExpiredDate = '#ffffff'
+    backgroundExpiredDate = '#ffffff';
   }
 
+  const btnDoneItem = props.showBtnDone?
+                        (<li>
+                          <button onClick= { (event) => onBtnDoneClick()}>
+                            Done
+                          </button>
+                        </li> )  : ( null );
 
   return (
-    <div className="chore-item" style={{background: backgroundChoreItem}} onClick={(event)=>handleClick(event)}>
-      <div className="title">
-        <div className="chore-name">{props.name}</div>
-        <input type="checkbox" name="" value="" ></input>
+    <div className="chore-item" style={{background: backgroundChoreItem}} >
+      <div onClick={(event)=>handleClick(event)}>
+          <div className="title">
+            <div className="chore-name">{props.name}</div>
+          </div>
+          <div className="chore-description">{props.description}</div>
+          <div className="roommate-name">assigned to: {props.roommateName}</div>
+          <div
+                style={{background: backgroundExpiredDate}}
+                className="expiration-date">Expiration Date: {props.expirationDate.toLocaleDateString("en-IL")}
+          </div>
+          <div className="assign-to-label">{() => (this.hoverMessage())}</div>
       </div>
-      <div className="chore-description">{props.description}</div>
-      <div className="roommate-name">assigned to: {props.roommateName}</div>
-      <div
-            style={{background: backgroundExpiredDate}}
-            className="expiration-date">Expiration Date: {props.expirationDate.toLocaleDateString("en-IL")}
+      <div className="footer-menu">
+            <ul className="list-menu">
+                {btnDoneItem}
+                <li>
+                  <button>Edit</button>
+                </li>
+            </ul>
       </div>
-      <div className="assign-to-label">{() => (this.hoverMessage())}</div>
     </div>
   );
 }

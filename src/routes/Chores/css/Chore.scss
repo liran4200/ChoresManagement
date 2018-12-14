@@ -1,5 +1,4 @@
 .chore-item {
-  height: 100px;
   font-size: 10px;
   color: black;
   padding: 4px;
@@ -37,4 +36,35 @@ input {
 .assign-to-label {
   display: none;
   font-size: 20px;
+}
+
+.footer-menu {
+  padding-top: 5px;
+}
+
+ul {
+  height: 30px;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+}
+
+li {
+  float: right;
+  height: 100%;
+}
+
+li button {
+  height: 100%;
+  background-color: #333;
+  display: block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+}
+
+li button:hover {
+  background-color: #111;
 }
