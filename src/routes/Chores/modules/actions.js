@@ -11,15 +11,24 @@ export function updateChore (newChore) {
   }
 }
 
-export function removeChore(chore) {
-  console.log(`in modify chore status ${JSON.stringify(chore)}`)
+export function removeChore(choreId) {
+  console.log(`in remove choreId : ${choreId}`)
   return {
     type: constants.REMOVE_CHORE,
-    payload: chore
+    payload: choreId
+  }
+}
+
+export function addChore(newChore) {
+  console.log(`in Update Chore ${JSON.stringify(newChore)}`)
+  return {
+    type    : constants.ADD_CHORE,
+    payload : newChore
   }
 }
 
 export const actions = {
   updateChore,
-  removeChore
+  removeChore,
+  addChore
 }

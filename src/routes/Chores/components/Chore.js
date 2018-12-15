@@ -3,15 +3,24 @@ import PropTypes from 'prop-types';
 import * as constants from '../modules/constants'
 import '../css/Chore.scss';
 
-export const createChore = (id, name, description, createDate, expirationDate, roommateName) => {
-  return {
-    "id": id,
-    "name": name,
-    "description": description,
-    "createDate": createDate,
-    "expirationDate": expirationDate,
-    "roommateName": roommateName
-  }
+export const createChore = (
+  id,
+  name,
+  description,
+  createDate,
+  expirationDate,
+  roommateName,
+  isRecurring
+) => {
+      return {
+        "id": id,
+        "name": name,
+        "description": description,
+        "createDate": createDate,
+        "expirationDate": expirationDate,
+        "roommateName": roommateName,
+        "isRecurring": isRecurring
+      }
 }
 
 export const Chore = (props) => {
@@ -26,7 +35,7 @@ export const Chore = (props) => {
       return
     }
     props.updateChore(createChore(props.id, props.name, props.description,
-      props.createDate, props.expirationDate, roommateName));
+      props.createDate, props.expirationDate, roommateName, props.isRecurring));
   }
 
   const hoverMessage = () => {
@@ -46,10 +55,22 @@ export const Chore = (props) => {
     return false;
   }
 
-  const onBtnDoneClick = () => {
-    console.log("btn done clicked")
-    props.removeChore(createChore(props.id, props.name, props.description,
-      props.createDate, props.expirationDate, props.roommateName));
+  const handleClickDone = () => {
+
+    props.removeChore(props.id);
+    if(props.isRecurring){
+        console.log("recurring chore!!")
+
+        //generate afterTomorrow day for recurring chore
+        let tomorrow = props.expirationDate;
+        let afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 1);
+        //add recurring chore
+        props.addChore(
+          createChore(props.id, props.name, props.description,
+            new Date() ,afterTomorrow , constants.UNASSIGNED_CHORE, props.isRecurring)
+        )
+    }
   }
 
   //defualt background
@@ -64,7 +85,7 @@ export const Chore = (props) => {
 
   const btnDoneItem = props.showBtnDone?
                         (<li>
-                          <button onClick= { (event) => onBtnDoneClick()}>
+                          <button onClick= { (event) => handleClickDone()}>
                             Done
                           </button>
                         </li> )  : ( null );
@@ -102,7 +123,10 @@ Chore.prototype = {
   createDate : PropTypes.object,
   expirationDate : PropTypes.object,
   roommateName : PropTypes.string,
+  isRecurring: PropTypes.boolean,
   updateChore : PropTypes.func,
+  removeChore : PropTypes.func,
+  addChore : PropTypes.func,
 }
 
 export default Chore;

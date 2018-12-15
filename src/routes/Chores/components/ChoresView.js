@@ -18,6 +18,7 @@ export const ChoresView = (props) => {
                 chores={props.assignedToMeChoresList}
                 updateChore={props.updateChore}
                 removeChore={props.removeChore}
+                addChore={props.addChore}
                 showBtnDone={true}
             />
             <ChoreList
