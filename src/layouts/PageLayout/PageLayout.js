@@ -8,12 +8,8 @@ export const PageLayout = ({ children }) => (
     <div className='page-layout_header'>
       <h1 className='page-layout_title'>Chore Score</h1>
       <div className='page-layout_nav_bar'>
-<<<<<<< HEAD
         <IndexLink to='/chores' activeClassName='page-layout__nav-item--active'> Chores </IndexLink>
         <IndexLink to='/signUp' activeClassName='page-layout__nav-item--active'> signUp </IndexLink>
-=======
-        {/* <IndexLink to='/chores' activeClassName='page-layout__nav-item--active'>Chores</IndexLink> */}
->>>>>>> master
       </div>
     </div>
     <div className='page-layout__viewport'>
