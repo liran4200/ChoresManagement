@@ -33,7 +33,7 @@ export const LoginForm = (props) => {
             <input type="password" onChange={(e) => props.updatePassword(e.target.value)}/>
           </div>
         </div>
-          <button type="submit" onClick={()=>loginFunction()}/>
+          <button type="submit" onClick={()=>loginFunction()}>Login</button>
         <div className="message">
         </div>
       </form>

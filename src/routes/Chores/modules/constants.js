@@ -4,6 +4,10 @@
 export const UPDATE_CHORE = 'UPDATE_CHORE'
 export const REMOVE_CHORE = 'REMOVE_CHORE'
 export const ADD_CHORE = 'ADD_CHORE'
+export const SHOW_EDIT_MODAL = 'SHOW_EDIT_MODAL'
+export const HIDE_EDIT_MODAL = 'HIDE_EDIT_MODAL'
+export const SHOW_CREATE_MODAL = 'SHOW_CREATE_MODAL'
+export const HIDE_CREATE_MODAL = 'HIDE_CREATE_MODAL'
 // ------------------------------------
 // Reducer
 // ------------------------------------

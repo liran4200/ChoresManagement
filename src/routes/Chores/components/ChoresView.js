@@ -1,6 +1,7 @@
-import React from 'react';
+import React from 'react'
 import ChoreList from './ChoreList'
-import PropTypes from 'prop-types';
+import PropTypes from 'prop-types'
+import EditChoreModal from './EditChoreModal'
 import '../css/ChoreView.scss'
 
 export const ChoresView = (props) => {
@@ -12,6 +13,7 @@ export const ChoresView = (props) => {
                 chores={props.unassignedChoresList}
                 updateChore={props.updateChore}
                 showBtnDone={false}
+                showEditModal={props.showEditModal}
             />
             <ChoreList
                 title="My Chores"
@@ -20,13 +22,21 @@ export const ChoresView = (props) => {
                 removeChore={props.removeChore}
                 addChore={props.addChore}
                 showBtnDone={true}
+                showEditModal={props.showEditModal}
             />
             <ChoreList
                 title="Assigned Chores"
                 chores={props.assignedToOthersChoresList}
                 updateChore={props.updateChore}
                 showBtnDone={false}
+                showEditModal={props.showEditModal}
             />
+            {(props.shouldShowEditChoreModal == true) ?
+            <EditChoreModal
+                shouldShowEditChoreModal={props.shouldShowEditChoreModal}
+                hideEditModal={props.hideEditModal}
+                choreToEdit={props.choreToEdit}
+            />:null}
             <div className='chore-view_space'/>
         </div>
     )
@@ -37,6 +47,8 @@ ChoresView.prototype = {
     unassignedChoresList : PropTypes.array,
     assignedToMeChoresList: PropTypes.array,
     assignedToOthersChoresList: PropTypes.array,
+    showEditChore: PropTypes.func,
+    hideEditChore: PropTypes.func,
 }
 
 export default ChoresView

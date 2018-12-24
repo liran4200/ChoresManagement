@@ -6,17 +6,17 @@ export const SignUpView = (props) => {
     return (
         <div className = "row">
             <div className = "col-md-4 col-md-offset-4">
-                <SignUpForm userSignUpRequest = {props.userSignUpRequest}/>
+                <SignUpForm 
+                    userSignUpRequest = {props.userSignUpRequest}
+                />
             </div>
         </div>
     );
 }
 
-
 SignUpView.propTypes = {
-    userSignupRequest: PropTypes.func.isReuiredת
-    
+    userSignupRequest: PropTypes.func,
+    users_list: PropTypes.array,
 }
-
 
 export default SignUpView

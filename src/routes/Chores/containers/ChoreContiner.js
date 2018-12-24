@@ -22,6 +22,8 @@ const mapStateToProps = (state) => (
         unassignedChoresList : state.chores.choresList.filter(unassignedChoresListFilter),
         assignedToMeChoresList: state.chores.choresList.filter(assignedToMeChoresListFilter),
         assignedToOthersChoresList: state.chores.choresList.filter(assignedToOthersChoresListFilter),
+        shouldShowEditChoreModal: state.chores.shouldShowEditChoreModal,
+        choreToEdit: state.chores.choreToEdit,
     }
 )
 

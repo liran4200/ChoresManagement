@@ -27,8 +27,26 @@ export function addChore(newChore) {
   }
 }
 
+export function showEditModal(chore) {
+  console.log('show edit modal')
+  return {
+    type: constants.SHOW_EDIT_MODAL,
+    payload: chore
+  }
+}
+
+export function hideEditModal(choreId) {
+  console.log('hide modal')
+  return {
+    type: constants.HIDE_EDIT_MODAL,
+    payload: choreId
+  }
+}
+
 export const actions = {
   updateChore,
   removeChore,
-  addChore
+  addChore,
+  showEditModal,
+  hideEditModal,
 }

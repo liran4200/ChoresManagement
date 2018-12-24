@@ -23,6 +23,7 @@ export const ChoreList = (props) => {
             removeChore={props.removeChore}
             addChore={props.addChore}
             showBtnDone={props.showBtnDone}
+            showEditModal={props.showEditModal}
           />
         )
       })
