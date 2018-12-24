@@ -29,6 +29,21 @@ const ACTION_HANDLERS = {
       ...state,
       choresList: newChoresList}
     },
+    [constants.SHOW_EDIT_MODAL]    : (state, action) => {
+      let showEditModal = true;
+      return {
+        ...state,
+        showEditChoreModal: showEditModal
+      }
+    },
+    [constants.HIDE_EDIT_MODAL]    : (state, action) => {
+      console.log("close")
+      let showEditModal = false;
+       return {
+        ...state,
+        showEditChoreModal: showEditModal
+      }
+    },
 }
 
 // ------------------------------------
@@ -74,6 +89,7 @@ const initialState = {
             "isRecurring":      false
         }
     ],
+    showEditChoreModal: false,
 }
 
 export default function choreReducer (state = initialState, action) {

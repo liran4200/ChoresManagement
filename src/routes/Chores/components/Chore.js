@@ -73,6 +73,11 @@ export const Chore = (props) => {
     }
   }
 
+  const handleClickEdit = () => {
+    console.log("edit chore!");
+    props.showEditModal("chore");
+  }
+
   //defualt background
   let backgroundExpiredDate = '';
   let backgroundChoreItem = '#00eeff';
@@ -108,7 +113,7 @@ export const Chore = (props) => {
             <ul className="list-menu">
                 {btnDoneItem}
                 <li>
-                  <button>Edit</button>
+                  <button onClick= {(event) => handleClickEdit()}>Edit</button>
                 </li>
             </ul>
       </div>
@@ -127,6 +132,7 @@ Chore.prototype = {
   updateChore : PropTypes.func,
   removeChore : PropTypes.func,
   addChore : PropTypes.func,
+  showEditModal: PropTypes.func,
 }
 
 export default Chore;
