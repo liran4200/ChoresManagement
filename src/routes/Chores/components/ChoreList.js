@@ -18,7 +18,11 @@ export const ChoreList = (props) => {
             createDate={chore.createDate}
             expirationDate={chore.expirationDate}
             roommateName={chore.roommateName}
+            isRecurring={chore.isRecurring}
             updateChore={props.updateChore}
+            removeChore={props.removeChore}
+            addChore={props.addChore}
+            showBtnDone={props.showBtnDone}
           />
         )
       })

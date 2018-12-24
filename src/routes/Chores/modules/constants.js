@@ -2,6 +2,8 @@
 // Acrions
 // ------------------------------------
 export const UPDATE_CHORE = 'UPDATE_CHORE'
+export const REMOVE_CHORE = 'REMOVE_CHORE'
+export const ADD_CHORE = 'ADD_CHORE'
 // ------------------------------------
 // Reducer
 // ------------------------------------
