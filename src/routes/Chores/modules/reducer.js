@@ -31,9 +31,12 @@ const ACTION_HANDLERS = {
     },
     [constants.SHOW_EDIT_MODAL]    : (state, action) => {
       let showEditModal = true;
+      let choreToEdit = state.choresList.filter((chore)=>chore.id === action.payload)
+      console.log(`chore to edit is ${JSON.stringify(choreToEdit)}`)
       return {
         ...state,
-        showEditChoreModal: showEditModal
+        shouldShowEditChoreModal: showEditModal,
+        choreToEdit: choreToEdit[0]
       }
     },
     [constants.HIDE_EDIT_MODAL]    : (state, action) => {
@@ -41,7 +44,7 @@ const ACTION_HANDLERS = {
       let showEditModal = false;
        return {
         ...state,
-        showEditChoreModal: showEditModal
+        shouldShowEditChoreModal: showEditModal
       }
     },
 }
@@ -89,7 +92,8 @@ const initialState = {
             "isRecurring":      false
         }
     ],
-    showEditChoreModal: false,
+    shouldShowEditChoreModal: false,
+    choreToEdit: {}
 }
 
 export default function choreReducer (state = initialState, action) {

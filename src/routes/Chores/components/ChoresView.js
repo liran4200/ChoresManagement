@@ -33,8 +33,9 @@ export const ChoresView = (props) => {
                 showEditModal={props.showEditModal}
             />
             <EditChoreModal
-                showEditChoreModal={props.showEditChoreModal}
+                shouldShowEditChoreModal={props.shouldShowEditChoreModal}
                 hideEditModal={props.hideEditModal}
+                choreToEdit={props.choreToEdit}
             />
 
             <div className='chore-view_space'/>

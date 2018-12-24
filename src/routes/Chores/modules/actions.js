@@ -35,11 +35,11 @@ export function showEditModal(chore) {
   }
 }
 
-export function hideEditModal(chore) {
+export function hideEditModal(choreId) {
   console.log('hide modal')
   return {
     type: constants.HIDE_EDIT_MODAL,
-    payload: chore
+    payload: choreId
   }
 }
 

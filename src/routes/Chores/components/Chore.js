@@ -75,7 +75,7 @@ export const Chore = (props) => {
 
   const handleClickEdit = () => {
     console.log("edit chore!");
-    props.showEditModal("chore");
+    props.showEditModal(props.id);
   }
 
   //defualt background
