@@ -10,7 +10,7 @@ import Home from './Home'
 export const createRoutes = (store) => ({
   path        : '/',
   component   : CoreLayout,
-  indexRoute  : Home,
+  indexRoute  : Home(store),
   childRoutes : [
     Chores(store)
   ]
