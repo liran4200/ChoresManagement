@@ -1,0 +1,14 @@
+.chore-view_continer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    height: 100%;
+}
+
+.chore-list_continer {
+    flex: 3;
+}
+
+.chore-view_space{
+    flex: 1;
+}
