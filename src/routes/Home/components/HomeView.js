@@ -4,13 +4,12 @@ import PropTypes from 'prop-types';
 import '../css/HomeView.scss';
 
 export const HomeView = (props) => {
-  console.log(`${JSON.stringify(props)}`)
+  console.log(`im am props ${JSON.stringify(props)}`)
   return ( 
             <LoginForm 
-            updateLogin={props.updateLogin}
             email={props.email}
             password={props.password}
-            isSuccess={props.isSuccess}
+            userList={props.userList}
             updateEmail={props.updateEmail}
             updatePassword={props.updatePassword}
             />
@@ -19,9 +18,8 @@ export const HomeView = (props) => {
 
 HomeView.Prototype = {
   email : PropTypes.string,
+  userList : PropTypes.object,
   password : PropTypes.string,
-  isSuccess:PropTypes.bool,
-  updateLogin: PropTypes.func,
   updateEmail: PropTypes.func,
   updatePassword: PropTypes.func
 }

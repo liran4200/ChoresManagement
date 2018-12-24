@@ -5,17 +5,11 @@ import * as constants from './constants'
 
 
 const ACTION_HANDLERS = {
-  [constants.UPDATE_LOGIN]: (state, action) => {
-    let login = action.login
-    return {...state,login}
-  },
   [constants.UPDATE_EMAIL]: (state, action) => {
-    let email =action.payload
-    return {...state,email}
+    return {...state, email: action.payload}
   },
   [constants.UPDATE_PASSWORD]: (state, action) => {
-    let password = action.payload
-    return {...state,password}
+    return {...state, password: action.payload}
   },
 }
 
@@ -26,7 +20,6 @@ const ACTION_HANDLERS = {
 const initialState = {
   "email":       "",
   "password":    "",
-  "isSuccess": false 
 }
 export default function homeReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]

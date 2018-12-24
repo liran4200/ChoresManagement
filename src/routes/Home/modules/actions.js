@@ -4,14 +4,6 @@ import * as constants from './constants'
 // Actions
 // ------------------------------------
 
-export function updateLogin (newLogin) {
-  console.log(`in Update Login ${JSON.stringify(newLogin)}`)
-  return {
-    type: constants.UPDATE_LOGIN,
-    login: newLogin
-  }
-}
-
 export function updateEmail(email) {
   console.log(`in update email:  ${email}`)
   return {
@@ -29,7 +21,6 @@ export function updatePassword(password) {
 }
 
 export const actions = {
-  updateLogin,
   updateEmail,
   updatePassword
 }

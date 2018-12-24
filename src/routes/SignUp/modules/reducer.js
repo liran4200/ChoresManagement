@@ -23,14 +23,12 @@ const initialState = {
     [
         {
             //add to each user: score.
-            "usrname":                   "NirYaNiro",
+            "usrname":                   "gal@gmail.com",
             "password":                  1234,
-            "passwordConfirmation":      1234,
         },
         {
-            "usrname":                   "YaMevorach",
+            "usrname":                   "dudu@gmail.com",
             "password":                  1234,
-            "passwordConfirmation":      1234,
         },
     ],
 }

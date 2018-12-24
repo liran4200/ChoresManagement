@@ -2,7 +2,6 @@ import React from 'react';
 import SignUpForm from './SignUpForm';
 import PropTypes from 'prop-types';
 
-
 export const SignUpView = (props) => {
     return (
         <div className = "row">

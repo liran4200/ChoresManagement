@@ -1,9 +1,5 @@
 import { injectReducer } from '../../store/reducers'
 import HomeContiner from './containers/HomeContiner'
-//Sync route definition
-//export default {
-// component : ChoreContiner
-//
 
 export default (store) => ({
   /*  Async getComponent is only invoked when route matches   */
@@ -14,10 +10,10 @@ export default (store) => ({
       /*  Webpack - use require callback to define
           dependencies for bundling   */
       const Home = require('./containers/HomeContiner').default
-      const reducer = require('./modules/reducer').default
+      //const reducer = require('./modules/reducer').default
 
       /*  Add the reducer to the store on key 'counter'  */
-      injectReducer(store, { key: 'home', reducer })
+      //injectReducer(store, { key: 'home', reducer })
 
       /*  Return getComponent   */
       cb(null, HomeContiner)
