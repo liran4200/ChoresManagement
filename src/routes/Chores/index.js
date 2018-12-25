@@ -17,7 +17,7 @@ export default (store) => ({
       const Chore = require('./containers/ChoreContiner').default
       const reducer = require('./modules/reducer').default
 
-      /*  Add the reducer to the store on key 'counter'  */
+      /*  Add the reducer to the store on key 'chores'  */
       injectReducer(store, { key: 'chores', reducer })
 
       /*  Return getComponent   */

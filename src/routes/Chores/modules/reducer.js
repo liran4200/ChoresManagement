@@ -1,4 +1,5 @@
 import * as constants from './constants'
+import uuid from 'uuid'
 // ------------------------------------
 // Action Handlers
 // ------------------------------------
@@ -30,21 +31,58 @@ const ACTION_HANDLERS = {
       choresList: newChoresList}
     },
     [constants.SHOW_EDIT_MODAL]    : (state, action) => {
-      let showEditModal = true;
       let choreToEdit = state.choresList.filter((chore)=>chore.id === action.payload)
       console.log(`chore to edit is ${JSON.stringify(choreToEdit)}`)
       return {
         ...state,
-        shouldShowEditChoreModal: showEditModal,
+        shouldShowEditChoreModal: true,
         choreToEdit: choreToEdit[0]
       }
     },
+    [constants.SHOW_NEW_MODAL]    : (state, action) => {
+      let choreToEdit = {
+        "id":               uuid(),
+        "name":             "",
+        "description":      "",
+        "createDate":       new Date(),
+        "expirationDate":   new Date(),
+        "roommateName":     constants.UNASSIGNED_CHORE,
+        "isRecurring":      false
+      }
+      return {
+        ...state,
+        shouldShowEditChoreModal: true,
+        choreToEdit: choreToEdit
+      }
+    },
     [constants.HIDE_EDIT_MODAL]    : (state, action) => {
-      console.log("close")
-      let showEditModal = false;
        return {
         ...state,
-        shouldShowEditChoreModal: showEditModal
+        shouldShowEditChoreModal: false
+      }
+    },
+    [constants.CHANGE_CHORE_TO_EDIT_NAME]    : (state, action) => {
+       return {
+        ...state,
+        choreToEdit: {...state.choreToEdit, "name": action.payload}
+      }
+    },
+    [constants.CHANGE_CHORE_TO_EDIT_DESCRIPTION]    : (state, action) => {
+       return {
+        ...state,
+        choreToEdit: {...state.choreToEdit, "description": action.payload}
+      }
+    },
+    [constants.CHANGE_CHORE_TO_EDIT_EXP_DATE]    : (state, action) => {
+       return {
+        ...state,
+        choreToEdit: {...state.choreToEdit, "expirationDate": action.payload}
+      }
+    },
+    [constants.CHANGE_CHORE_TO_EDIT_RECURRING]    : (state, action) => {
+       return {
+        ...state,
+        choreToEdit: {...state.choreToEdit, "isRecurring": action.payload}
       }
     },
 }
@@ -56,7 +94,7 @@ const initialState = {
     choresList:
     [
         {
-            "id":               "1000",
+            "id":               uuid(),
             "name":             "Garbge",
             "description": "    Throwing away garbge every day",
             "createDate":       new Date("2018-12-15"),
@@ -65,7 +103,7 @@ const initialState = {
             "isRecurring":      true
         },
         {
-            "id":               "1001",
+            "id":               uuid(),
             "name":             "Kitchen",
             "description":      "Cleaning all the kitchen",
             "createDate":       new Date("2018-12-3"),
@@ -74,7 +112,7 @@ const initialState = {
             "isRecurring":      false
         },
         {
-            "id":               "1002",
+            "id":               uuid(),
             "name":             "Clean TV in living room",
             "description":      "Clean dast on TV with special metrial",
             "createDate":       new Date("2018-12-3"),
@@ -83,7 +121,7 @@ const initialState = {
             "isRecurring":      false
         },
         {
-            "id":               "1003",
+            "id":               uuid(),
             "name":             "Clean Nir room",
             "description":      "Cleaning desk",
             "createDate":       new Date("2018-12-4"),

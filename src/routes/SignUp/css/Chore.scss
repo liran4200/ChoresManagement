@@ -1,0 +1,41 @@
+.chore-item{
+  height: 100px;
+  background: #00eeff;
+  font-size: 10px;
+  color: black;
+  padding: 4px;
+  margin: 4px;
+}
+
+.title {
+  background: #212829;
+  height: 30px;
+  padding-top: 3px;
+  padding-left: 5px;
+}
+
+.chore-name {
+  font-size: 20px;
+  color: white;
+}
+
+input {
+    float: right;
+}
+
+.chore-description {
+    padding: 5px;
+}
+
+.chore-item:hover {
+  cursor: pointer;
+}
+
+.chore-item:hover .assign-to-label {
+  display: block;
+}
+
+.assign-to-label {
+  display: none;
+  font-size: 20px;
+}

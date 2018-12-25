@@ -1,13 +1,14 @@
 import React from 'react'
 import ChoreList from './ChoreList'
 import PropTypes from 'prop-types'
-import EditChoreModal from './EditChoreModal'
+import ChoreModal from './ChoreModal'
 import '../css/ChoreView.scss'
 
 export const ChoresView = (props) => {
   console.log(props)
     return (
         <div className='chore-view_continer'>
+            <button onClick={()=>props.showNewModal()}>Create New Chore</button>
             <div className='chore-view_space'/>
             <ChoreList
                 title="Unassigned Chores"
@@ -32,10 +33,15 @@ export const ChoresView = (props) => {
                 showBtnDone={false}
                 showEditModal={props.showEditModal}
             />
-            <EditChoreModal
+            <ChoreModal
                 shouldShowEditChoreModal={props.shouldShowEditChoreModal}
                 hideEditModal={props.hideEditModal}
                 choreToEdit={props.choreToEdit}
+                updateChore={props.updateChore}
+                changeChoreToEditNameField={props.changeChoreToEditNameField}
+                changeChoreToEditDescriptionField={props.changeChoreToEditDescriptionField}
+                changeChoreToEditExpirationField={props.changeChoreToEditExpirationField}
+                changeChoreToEditRecurringField={props.changeChoreToEditRecurringField}
             />
 
             <div className='chore-view_space'/>
@@ -49,8 +55,17 @@ ChoresView.prototype = {
     assignedToMeChoresList: PropTypes.array,
     assignedToOthersChoresList: PropTypes.array,
     showEditChore: PropTypes.func,
+    showNewModal: PropTypes.func,
     hideEditChore: PropTypes.func,
-    // showNewChoreModal: PropTypes.boolean,
+    changeChoreToEditNameField: PropTypes.func,
+    changeChoreToEditDescriptionField: PropTypes.func,
+    changeChoreToEditExpirationField: PropTypes.func,
+    changeChoreToEditRecurringField: PropTypes.func,
+    changeChoreToNewNameField: PropTypes.func,
+    changeChoreToNewDescriptionField: PropTypes.func,
+    changeChoreToNewExpirationField: PropTypes.func,
+    changeChoreToNewRecurringField: PropTypes.func,
+    shouldShowEditChoreModal: PropTypes.boolean,
 }
 
 export default ChoresView
