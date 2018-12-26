@@ -47,7 +47,8 @@ const ACTION_HANDLERS = {
         "createDate":       new Date(),
         "expirationDate":   new Date(),
         "roommateName":     constants.UNASSIGNED_CHORE,
-        "isRecurring":      false
+        "isRecurring":      false,
+        "score":            0,
       }
       return {
         ...state,
@@ -85,6 +86,12 @@ const ACTION_HANDLERS = {
         choreToEdit: {...state.choreToEdit, "isRecurring": action.payload}
       }
     },
+    [constants.CHANGE_CHORE_TO_EDIT_RECURRING]    : (state, action) => {
+      return {
+       ...state,
+       choreToEdit: {...state.choreToEdit, "score": action.payload}
+     }
+   },
 }
 
 // ------------------------------------
@@ -100,7 +107,8 @@ const initialState = {
             "createDate":       new Date("2018-12-15"),
             "expirationDate":   new Date("2018-12-16"),
             "roommateName":     constants.UNASSIGNED_CHORE,
-            "isRecurring":      true
+            "isRecurring":      true,
+            "score":            10,
         },
         {
             "id":               uuid(),
@@ -108,8 +116,9 @@ const initialState = {
             "description":      "Cleaning all the kitchen",
             "createDate":       new Date("2018-12-3"),
             "expirationDate":   new Date("2018-12-6"),
-            "roommateName":     constants.UNASSIGNED_CHORE,
-            "isRecurring":      false
+            "roommateName":     "dudu@gmail.com",
+            "isRecurring":      false,
+            "score":            10,
         },
         {
             "id":               uuid(),
@@ -117,8 +126,9 @@ const initialState = {
             "description":      "Clean dast on TV with special metrial",
             "createDate":       new Date("2018-12-3"),
             "expirationDate":   new Date("2018-12-14"),
-            "roommateName":     "Liran Yehudar",
-            "isRecurring":      false
+            "roommateName":     "gal@gmail.com",
+            "isRecurring":      false,
+            "score":            10,
         },
         {
             "id":               uuid(),
@@ -126,8 +136,9 @@ const initialState = {
             "description":      "Cleaning desk",
             "createDate":       new Date("2018-12-4"),
             "expirationDate":   new Date("2018-12-15"),
-            "roommateName":     "Nir Finz",
-            "isRecurring":      false
+            "roommateName":     "gal@gmail.com",
+            "isRecurring":      false,
+            "score":            10,
         }
     ],
     shouldShowEditChoreModal: false,

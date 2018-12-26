@@ -25,12 +25,12 @@ export const LoginForm = (props) => {
   return (
     <form name="HomeView" onSubmit={ handleSubmit }>
         <div className="form-group-collection">
-          <div className="form-group">
+          <div className="form-labels">
             <label>Email:</label>
-            <input type="email" onChange={ (e) => props.updateEmail(e.target.value)}/>
-          </div>
-          <div className="form-group">
             <label>Password:</label>
+          </div>
+          <div className="form-input">
+            <input type="email" onChange={ (e) => props.updateEmail(e.target.value)}/>
             <input type="password" onChange={(e) => props.updatePassword(e.target.value)}/>
           </div>
         </div>

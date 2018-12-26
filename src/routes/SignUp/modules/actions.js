@@ -32,6 +32,13 @@ export function changeUserNameField(newUser) {
   }
 }
 
+export function addScoreToUser(val) {
+  return {
+    type    : constants.ADD_SCORE_TO_USER,
+    payload : val
+  }
+}
+
 export const actions = {
   userSignUpRequest,
   changeUserNameField,

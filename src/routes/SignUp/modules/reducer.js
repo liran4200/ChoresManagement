@@ -19,6 +19,18 @@ const ACTION_HANDLERS = {
     [constants.CHANGE_USRNAME_FIELD]    : (state, action) => {
         return {...state,username: action.payload}
     },
+    [constants.ADD_SCORE_TO_USER]    : (state, action) => {
+        const username = action.payload.username
+        let toR=state.users_list
+        toR = toR.map((user)=>{
+            if(user.username == username){
+                return({...user,"score": user.score + action.payload.score})
+            }else{
+                return user
+            }
+        })
+        return {...state,users_list: toR}
+    },
 }
 
 // ------------------------------------
@@ -29,12 +41,14 @@ const initialState = {
     [
         {
             //add to each user: score.
-            "username":                   "gal@gmail.com",
-            "password":                  1234,
+            "username": "gal@gmail.com",
+            "password": 1234,
+            "score":    100,             
         },
         {
-            "username":                   "dudu@gmail.com",
-            "password":                  1234,
+            "username": "dudu@gmail.com",
+            "password": 1234,
+            "score":    50,             
         },
     ],
     username: "",

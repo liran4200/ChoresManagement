@@ -26,6 +26,7 @@ export const SignUpForm = (props) => {
         props.userSignUpRequest({
             "username":  props.username,
             "password": props.password,
+            "score":    0
         })
         props.changeUserNameField("")
         props.changePasswardField("")

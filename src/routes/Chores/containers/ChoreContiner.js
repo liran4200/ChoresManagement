@@ -10,20 +10,17 @@ import { connect } from 'react-redux'
 import { actions } from '../modules/actions'
 import * as constants from '../modules/constants'
 import ChoresView from '../components/ChoresView'
+import { addScoreToUser } from '../../SignUp/modules/actions'
 
-const unassignedChoresListFilter = (value, index) => (value['roommateName'] === constants.UNASSIGNED_CHORE)
-const assignedToMeChoresListFilter = (value, index) => (value['roommateName'] === constants.ASSIGNED_TO_ME_CHORE)
-const assignedToOthersChoresListFilter = (value, index) => (![constants.ASSIGNED_TO_ME_CHORE, constants.UNASSIGNED_CHORE].includes(value['roommateName']))
-
-const mapDispatchToProps = {...actions}
+const mapDispatchToProps = {...actions, addScoreToUser}
 
 const mapStateToProps = (state) => (
     {
-        unassignedChoresList : state.chores.choresList.filter(unassignedChoresListFilter),
-        assignedToMeChoresList: state.chores.choresList.filter(assignedToMeChoresListFilter),
-        assignedToOthersChoresList: state.chores.choresList.filter(assignedToOthersChoresListFilter),
+        choresList : state.chores.choresList,
         shouldShowEditChoreModal: state.chores.shouldShowEditChoreModal,
         choreToEdit: state.chores.choreToEdit,
+        logedinUser: state.home.email,
+        usersList: state.signUp.users_list,
     }
 )
 

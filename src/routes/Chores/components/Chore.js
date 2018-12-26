@@ -10,16 +10,18 @@ export const createChore = (
   createDate,
   expirationDate,
   roommateName,
-  isRecurring
+  isRecurring,
+  score
 ) => {
       return {
-        "id": id,
-        "name": name,
-        "description": description,
-        "createDate": createDate,
+        "id":             id,
+        "name":           name,
+        "description":    description,
+        "createDate":     createDate,
         "expirationDate": expirationDate,
-        "roommateName": roommateName,
-        "isRecurring": isRecurring
+        "roommateName":   roommateName,
+        "isRecurring":    isRecurring,
+        "score":          score,
       }
 }
 
@@ -28,20 +30,20 @@ export const Chore = (props) => {
   const handleClick = (event) => {
     let roommateName;
     if(props.roommateName === constants.UNASSIGNED_CHORE){
-      roommateName = constants.ASSIGNED_TO_ME_CHORE
-    }else if(props.roommateName === constants.ASSIGNED_TO_ME_CHORE){
+      roommateName = props.logedinUser
+    }else if(props.roommateName === props.logedinUser){
       roommateName = constants.UNASSIGNED_CHORE
     }else{
       return
     }
     props.updateChore(createChore(props.id, props.name, props.description,
-      props.createDate, props.expirationDate, roommateName, props.isRecurring));
+      props.createDate, props.expirationDate, roommateName, props.isRecurring, props.score));
   }
 
   const hoverMessage = () => {
     switch (props.roommateName) {
       case constants.UNASSIGNED_CHORE: "assign to me";
-      case constants.ASSIGNED_TO_ME_CHORE: "unassign";
+      case props.logedinUser: "unassign";
       default: "this chore is already assigned";
     }
   }
@@ -56,11 +58,10 @@ export const Chore = (props) => {
   }
 
   const handleClickDone = () => {
-
+    props.addScoreToUser({"username": props.roommateName ,"score":  props.score})
     props.removeChore(props.id);
     if(props.isRecurring){
         console.log("recurring chore!!")
-
         //generate afterTomorrow day for recurring chore
         let tomorrow = props.expirationDate;
         let afterTomorrow = new Date();
@@ -68,7 +69,7 @@ export const Chore = (props) => {
         //add recurring chore
         props.addChore(
           createChore(props.id, props.name, props.description,
-            new Date() ,afterTomorrow , constants.UNASSIGNED_CHORE, props.isRecurring)
+            new Date() ,afterTomorrow , constants.UNASSIGNED_CHORE, props.isRecurring, props.score)
         )
     }
   }
@@ -129,10 +130,13 @@ Chore.prototype = {
   expirationDate : PropTypes.object,
   roommateName : PropTypes.string,
   isRecurring: PropTypes.boolean,
+  score: PropTypes.number,
   updateChore : PropTypes.func,
   removeChore : PropTypes.func,
   addChore : PropTypes.func,
+  addScoreToUser : PropTypes.func,
   showEditModal: PropTypes.func,
+  logedinUser: PropTypes.string
 }
 
 export default Chore;

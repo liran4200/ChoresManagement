@@ -77,28 +77,9 @@ export function changeChoreToEditRecurringField(val) {
   }
 }
 
-export function changeChoreToNewNameField(val) {
+export function changeChoreToEditScoreField(val) {
   return {
-    type: constants.CHANGE_CHORE_TO_NEW_NAME,
-    payload: val
-  }
-}
-export function changeChoreToNewDescriptionField(val) {
-  return {
-    type: constants.CHANGE_CHORE_TO_NEW_DESCRIPTION,
-    payload: val
-  }
-}
-export function changeChoreToNewExpirationField(val) {
-  return {
-    type: constants.CHANGE_CHORE_TO_NEW_EXP_DATE,
-    payload: val
-  }
-}
-
-export function changeChoreToNewRecurringField(val) {
-  return {
-    type: constants.CHANGE_CHORE_TO_NEW_RECURRING,
+    type: constants.CHANGE_CHORE_TO_EDIT_SCORE,
     payload: val
   }
 }
@@ -114,8 +95,5 @@ export const actions = {
   changeChoreToEditDescriptionField,
   changeChoreToEditExpirationField,
   changeChoreToEditRecurringField,
-  changeChoreToNewNameField,
-  changeChoreToNewDescriptionField,
-  changeChoreToNewExpirationField,
-  changeChoreToNewRecurringField,
+  changeChoreToEditScoreField,
 }
