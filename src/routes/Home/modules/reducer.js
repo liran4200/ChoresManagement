@@ -11,6 +11,9 @@ const ACTION_HANDLERS = {
   [constants.UPDATE_PASSWORD]: (state, action) => {
     return {...state, password: action.payload}
   },
+  [constants.UPDATE_LOGIN]: (state, action) => {
+    return {...state, isLogedIn: action.payload}
+  },
 }
 
 // ------------------------------------
@@ -20,7 +23,9 @@ const ACTION_HANDLERS = {
 const initialState = {
   "email":       "",
   "password":    "",
+  "isLogedIn":   false,
 }
+
 export default function homeReducer (state = initialState, action) {
   const handler = ACTION_HANDLERS[action.type]
 

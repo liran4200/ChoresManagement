@@ -17,7 +17,7 @@ const mapStateToProps = (state) => {
     return {
       email: state.home.email,
       password: state.home.password,
-      userList: state.signUp.users_list,
+      isLogedIn: state.home.isLogedIn,
     };
   }
   

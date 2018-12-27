@@ -20,12 +20,9 @@ export const ChoreList = (props) => {
             roommateName={chore.roommateName}
             isRecurring={chore.isRecurring}
             score={chore.score}
-            updateChore={props.updateChore}
-            removeChore={props.removeChore}
-            addChore={props.addChore}
+            updateChoreList={props.updateChoreList}
             showBtnDone={props.showBtnDone}
             showEditModal={props.showEditModal}
-            addScoreToUser={props.addScoreToUser}
             logedinUser={props.logedinUser}
           />
         )
@@ -38,7 +35,10 @@ export const ChoreList = (props) => {
 ChoreList.prototype = {
   title: PropTypes.string,
   chores: PropTypes.array,
-  updateChore: PropTypes.func,
+  updateChoreList: PropTypes.func,
+  showBtnDone: PropTypes.bool,
+  showEditModal: PropTypes.func,
+  logedinUser: PropTypes.string,
 }
 
 export default ChoreList;

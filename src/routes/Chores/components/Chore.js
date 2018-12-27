@@ -1,51 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as constants from '../modules/constants'
+import { addNewChore} from '../../../serverCalls/choreAPI'
+import { markAsAssigenedToMe , markAsDone, markAsUnassigene } from '../../../serverCalls/activityAPI'
 import '../css/Chore.scss';
 
-export const createChore = (
-  id,
-  name,
-  description,
-  createDate,
-  expirationDate,
-  roommateName,
-  isRecurring,
-  score
-) => {
-      return {
-        "id":             id,
-        "name":           name,
-        "description":    description,
-        "createDate":     createDate,
-        "expirationDate": expirationDate,
-        "roommateName":   roommateName,
-        "isRecurring":    isRecurring,
-        "score":          score,
-      }
-}
-
 export const Chore = (props) => {
-
+  // add is reacuring and description
   const handleClick = (event) => {
     let roommateName;
     if(props.roommateName === constants.UNASSIGNED_CHORE){
-      roommateName = props.logedinUser
+      markAsAssigenedToMe(props.id, props.logedinUser)
     }else if(props.roommateName === props.logedinUser){
-      roommateName = constants.UNASSIGNED_CHORE
+      markAsUnassigene(props.id, props.logedinUser)
     }else{
       return
     }
-    props.updateChore(createChore(props.id, props.name, props.description,
-      props.createDate, props.expirationDate, roommateName, props.isRecurring, props.score));
-  }
-
-  const hoverMessage = () => {
-    switch (props.roommateName) {
-      case constants.UNASSIGNED_CHORE: "assign to me";
-      case props.logedinUser: "unassign";
-      default: "this chore is already assigned";
-    }
+    props.updateChoreList()
   }
 
   const isExpiredDate = () => {
@@ -58,8 +29,7 @@ export const Chore = (props) => {
   }
 
   const handleClickDone = () => {
-    props.addScoreToUser({"username": props.roommateName ,"score":  props.score})
-    props.removeChore(props.id);
+    markAsDone(props.id, props.logedinUser);
     if(props.isRecurring){
         console.log("recurring chore!!")
         //generate afterTomorrow day for recurring chore
@@ -67,11 +37,9 @@ export const Chore = (props) => {
         let afterTomorrow = new Date();
         afterTomorrow.setDate(tomorrow.getDate() + 1);
         //add recurring chore
-        props.addChore(
-          createChore(props.id, props.name, props.description,
-            new Date() ,afterTomorrow , constants.UNASSIGNED_CHORE, props.isRecurring, props.score)
-        )
+        addNewChore(props.name, props.logedinUser, afterTomorrow, props.score, props.isRecurring, props.description)
     }
+    props.updateChoreList()
   }
 
   const handleClickEdit = () => {
@@ -108,7 +76,6 @@ export const Chore = (props) => {
                 style={{background: backgroundExpiredDate}}
                 className="expiration-date">Expiration Date: {props.expirationDate.toLocaleDateString("en-IL")}
           </div>
-          <div className="assign-to-label">{() => (this.hoverMessage())}</div>
       </div>
       <div className="footer-menu">
             <ul className="list-menu">
@@ -131,10 +98,8 @@ Chore.prototype = {
   roommateName : PropTypes.string,
   isRecurring: PropTypes.boolean,
   score: PropTypes.number,
-  updateChore : PropTypes.func,
-  removeChore : PropTypes.func,
-  addChore : PropTypes.func,
-  addScoreToUser : PropTypes.func,
+  updateChoreList: PropTypes.func,
+  showBtnDone: PropTypes.bool,
   showEditModal: PropTypes.func,
   logedinUser: PropTypes.string
 }

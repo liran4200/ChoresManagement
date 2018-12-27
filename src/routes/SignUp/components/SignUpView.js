@@ -1,25 +1,32 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SignUpForm from './SignUpForm';
 import PropTypes from 'prop-types';
+import { browserHistory } from 'react-router'
 
-export const SignUpView = (props) => {
-    return (
-        <div className = "row">
-            <div className = "col-md-4 col-md-offset-4">
-                <SignUpForm 
-                    userSignUpRequest = {props.userSignUpRequest}
-                    usersList = {props.users_list}
-                    username = {props.username}
-                    password = {props.password}
-                    passwordConf = {props.passwordConf}
-                    changeUserNameField = {props.changeUserNameField}
-                    changePasswardConfField = {props.changePasswardConfField}
-                    changePasswardField = {props.changePasswardField}
-                
-                />
+class SignUpView extends Component {
+    componentWillMount(){
+        if(this.props.isLogedIn){
+            console.log("entered SignUp with user loged in, logout and try again")
+            browserHistory.push("/")
+        }
+    }
+
+    render() {
+        return (
+            <div className = "row">
+                <div className = "col-md-4 col-md-offset-4">
+                    <SignUpForm 
+                        username = {this.props.username}
+                        password = {this.props.password}
+                        passwordConf = {this.props.passwordConf}
+                        changeUserNameField = {this.props.changeUserNameField}
+                        changePasswardConfField = {this.props.changePasswardConfField}
+                        changePasswardField = {this.props.changePasswardField}
+                    />
+                </div>
             </div>
-        </div>
-    );
+        );
+    }    
 }
 
 SignUpView.propTypes = {
@@ -27,7 +34,6 @@ SignUpView.propTypes = {
     changeUserNameField: PropTypes.func,
     changePasswardConfField: PropTypes.func,
     changePasswardField: PropTypes.func,
-    users_list: PropTypes.array,
     username: PropTypes.string,
     password: PropTypes.string,
     passwordConf: PropTypes.string,

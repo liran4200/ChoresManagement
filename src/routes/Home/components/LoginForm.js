@@ -2,23 +2,22 @@ import '../css/HomeView.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { browserHistory } from 'react-router'
+import { loginFunc } from '../../../serverCalls/userAPI'
 
 export const LoginForm = (props) => {
-  const isUserExists = (username, password) => {
-    console.log("in validaton " + username  + password)
-    return props.userList.some((user)=> {
-      return (user.username == username) && (user.password == password)
-    }) 
-  }
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    if(isUserExists(props.email, props.password)){
+    try {
+      loginFunc(props.email, props.password)
       console.log("im in login function user exist")
-      browserHistory.push('/chores')  
-    }else{
-      console.log("im in login function, user dosent exist restarting")
+      this.props.updateIsLogin(true)
+      browserHistory.push('/chores')
+    } catch (error) {
+      console.log("im in login function, error login: " + error.message)
       props.updateEmail("")
       props.updatePassword("")  
+
     }
   }
   

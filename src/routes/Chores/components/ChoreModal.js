@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
+import { editChore, addNewChore } from '../../../serverCalls/choreAPI'
 import '../css/ChoreModal.scss';
 
 export const ChoreModal = (props) => {
@@ -30,15 +31,14 @@ export const ChoreModal = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    props.updateChore({
-      "id":               props.choreToEdit.id,
-      "name":             props.choreToEdit.name,
-      "description":      props.choreToEdit.description,
-      "createDate":       props.choreToEdit.createDate,
-      "expirationDate":   new Date(expiredDateString),
-      "roommateName":     props.choreToEdit.roommateName,
-      "isRecurring":      props.choreToEdit.isRecurring
-    })
+    if(props.choreToEdit.id == "newChore"){
+      addNewChore(props.choreToEdit.name, props.choreToEdit.roommateName, expiredDateString, 0,
+        props.choreToEdit.isRecurring, props.choreToEdit.description)
+    }else{
+      editChore(props.choreToEdit.id, props.choreToEdit.name, props.choreToEdit.roommateName,
+        expiredDateString, props.choreToEdit.score, props.choreToEdit.isRecurring, props.choreToEdit.description)
+    }
+    props.updateChoreList()
     props.hideEditModal()
   }
 
@@ -62,6 +62,9 @@ export const ChoreModal = (props) => {
           <br/>
           <label>recurring chore:
           <input type="checkbox" className="edit-modal-chore-is-recurring" onChange={(e)=>props.changeChoreToEditRecurringField(e.target.value)} value={props.choreToEdit.isRecurring}/>
+          </label>
+          <label>score:
+          <input type="number" className="edit-modal-chore-is-recurring" onChange={(e)=>props.changeChoreToEditScoreField(e.target.value)} value={props.choreToEdit.score}/>
           </label>
           <br/>
           <input type="submit" className="edit-modal-chore-submit-btn" value="submit"/>

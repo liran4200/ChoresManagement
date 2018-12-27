@@ -20,7 +20,15 @@ export function updatePassword(password) {
   }
 }
 
+export function updateIsLogin(bool) {
+  console.log(`in updateIsLogin:  ${bool}`)
+  return {
+    type: constants.UPDATE_LOGIN,
+    payload: bool
+  }
+}
 export const actions = {
   updateEmail,
-  updatePassword
+  updatePassword,
+  updateIsLogin,
 }

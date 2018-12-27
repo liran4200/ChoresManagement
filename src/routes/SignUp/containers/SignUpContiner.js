@@ -14,10 +14,10 @@ const mapDispatchToProps = {...actions}
 
 const mapStateToProps = (state) => (
     {
-        users_list : state.signUp.users_list,
         username: state.signUp.username,
         password: state.signUp.password,
         passwordConf: state.signUp.passwordConf,
+        isLogedIn: state.home.isLogedIn,
     }
 )
 

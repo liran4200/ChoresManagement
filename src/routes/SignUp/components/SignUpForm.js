@@ -2,36 +2,25 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router'
+import { registerUser } from '../../../serverCalls/userAPI'
 
 export const SignUpForm = (props) => {
-
-    const isUserExists = (username) => {
-        console.log("in validaton " + username)
-        return props.usersList.some((user)=> {
-          return user.username == username
-        }) 
-    }
-
+    //TODO: ADD ERRORS
     const handleSubmit = (e) => {
-        console.log(JSON.stringify(props))
         e.preventDefault();
         if(props.passwordConf != props.password){e
             console.log("cant wrong password conf")
             return
         }
-        if(isUserExists(props.username)){
-            console.log("cant add user exist")
-            return
+        try {
+            user = registerUser(props.username, props.password)
+            props.changeUserNameField("")
+            props.changePasswardField("")
+            props.changePasswardConfField("")
+            browserHistory.push('/')
+        } catch (error) {
+            console.error("error in reg user: " + error.message)
         }
-        props.userSignUpRequest({
-            "username":  props.username,
-            "password": props.password,
-            "score":    0
-        })
-        props.changeUserNameField("")
-        props.changePasswardField("")
-        props.changePasswardConfField("")
-        browserHistory.push('/')
     }
 
     return(
@@ -76,11 +65,9 @@ export const SignUpForm = (props) => {
 }
 
 SignUpForm.propTypes = {
-    userSignupRequest: PropTypes.func,
     changeUserNameField: PropTypes.func,
     changePasswardConfField: PropTypes.func,
     changePasswardField: PropTypes.func,
-    usersList: PropTypes.array,
     username: PropTypes.string,
     password: PropTypes.string,
     passwordConf: PropTypes.string,

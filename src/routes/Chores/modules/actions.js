@@ -1,29 +1,35 @@
 import * as constants from './constants'
+import { getUserList } from '../../../serverCalls/activityAPI'
+import { getChoreList } from '../../../serverCalls/choreAPI'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export function updateChore (newChore) {
-  console.log(`in Update Chore ${JSON.stringify(newChore)}`)
+export function updateUserListAction(usersList) {
+  console.log(`in updateUserListAction ${JSON.stringify(newChore)}`)
   return {
-    type    : constants.UPDATE_CHORE,
-    payload : newChore
+    type: constants.UPDATE_USER_LIST,
+    payload: usersList
   }
 }
 
-export function removeChore(choreId) {
-  console.log(`in remove choreId : ${choreId}`)
+export function updateChoreListAction(usersList) {
+  console.log(`in updateChoreListAction ${JSON.stringify(newChore)}`)
   return {
-    type: constants.REMOVE_CHORE,
-    payload: choreId
+    type: constants.UPDATE_CHORE_LIST,
+    payload: usersList
   }
 }
 
-export function addChore(newChore) {
-  console.log(`in addChore Chore ${JSON.stringify(newChore)}`)
-  return {
-    type    : constants.ADD_CHORE,
-    payload : newChore
+export function updateUserList() {
+  return dispatch => {
+    dispatch(updateUserListAction(getUserList()))
+  }
+}
+
+export function updateChoreList() {
+  return dispatch => {
+    dispatch(updateChoreListAction(getChoreList()))
   }
 }
 
@@ -50,6 +56,13 @@ export function hideEditModal() {
   }
 }
 
+export function changePageLoaded(val) {
+  return {
+    type: constants.CHANGE_CHORE_PAGE_LOADED,
+    payload: val
+  }
+}
+
 export function changeChoreToEditNameField(val) {
   return {
     type: constants.CHANGE_CHORE_TO_EDIT_NAME,
@@ -63,7 +76,6 @@ export function changeChoreToEditDescriptionField(val) {
   }
 }
 export function changeChoreToEditExpirationField(val) {
-  console.log("aaaaaaaaa " + val)
   return {
     type: constants.CHANGE_CHORE_TO_EDIT_EXP_DATE,
     payload: new Date(val)
@@ -85,12 +97,12 @@ export function changeChoreToEditScoreField(val) {
 }
 
 export const actions = {
-  updateChore,
-  removeChore,
-  addChore,
+  updateUserList,
+  updateChoreList,
   showEditModal,
   showNewModal,
   hideEditModal,
+  changePageLoaded,
   changeChoreToEditNameField,
   changeChoreToEditDescriptionField,
   changeChoreToEditExpirationField,

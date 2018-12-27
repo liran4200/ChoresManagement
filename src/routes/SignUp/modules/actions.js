@@ -4,13 +4,6 @@ import * as constants from './constants'
 // Actions
 // ------------------------------------
 
-export function userSignUpRequest(newUser) {
-    return {
-      type    : constants.SIGN_UP_REQUEST,
-      payload : newUser
-    }
-}
-
 export function changePasswardField(newUser) {
   return {
     type    : constants.CHANGE_PASSWARD_FIELD,
@@ -32,15 +25,7 @@ export function changeUserNameField(newUser) {
   }
 }
 
-export function addScoreToUser(val) {
-  return {
-    type    : constants.ADD_SCORE_TO_USER,
-    payload : val
-  }
-}
-
 export const actions = {
-  userSignUpRequest,
   changeUserNameField,
   changePasswardConfField,
   changePasswardField,

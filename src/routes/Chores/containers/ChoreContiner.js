@@ -8,11 +8,9 @@ component
 */
 import { connect } from 'react-redux'
 import { actions } from '../modules/actions'
-import * as constants from '../modules/constants'
 import ChoresView from '../components/ChoresView'
-import { addScoreToUser } from '../../SignUp/modules/actions'
 
-const mapDispatchToProps = {...actions, addScoreToUser}
+const mapDispatchToProps = {...actions}
 
 const mapStateToProps = (state) => (
     {
@@ -20,7 +18,8 @@ const mapStateToProps = (state) => (
         shouldShowEditChoreModal: state.chores.shouldShowEditChoreModal,
         choreToEdit: state.chores.choreToEdit,
         logedinUser: state.home.email,
-        usersList: state.signUp.users_list,
+        userList: state.chores.userList,
+        isPageLoaded: state.chores.isPageLoaded,
     }
 )
 
