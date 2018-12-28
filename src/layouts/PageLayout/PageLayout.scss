@@ -3,8 +3,12 @@
   flex-direction: column;
 }
 
+.container{
+  max-width: 100%;
+  height: 100%;
+}
+
 .page-layout_header{
-  flex: 3;
   display: flex;
   flex-direction: column;
 }

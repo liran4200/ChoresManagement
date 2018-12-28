@@ -7,9 +7,10 @@ import '../css/HomeView.scss';
 export const HomeView = (props) => {
   console.log(`im am props ${JSON.stringify(props)}`)
   return (
-    <div>
-      <div className='login-space' />
+    <div className="homeView-container">
       <div className='login-continer'>
+
+        <h5 className="card-title text-center">Sign In</h5>
         <LoginForm
           email={props.email}
           password={props.password}
@@ -17,12 +18,13 @@ export const HomeView = (props) => {
           updateEmail={props.updateEmail}
           updatePassword={props.updatePassword}
         />
-        <div>
+        <div className="panel-footer">
           <div>Don't have an account ?</div>
           <a href="./signUp">Sign Up!</a>
         </div>
       </div>
     </div>
+
   );
 }
 
