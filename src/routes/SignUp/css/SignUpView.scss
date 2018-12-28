@@ -12,3 +12,18 @@
 .chore-view_space{
     flex: 1;
 }
+
+.signUpView-container {
+  margin: 10px;
+  border-radius: 20px;
+  border-color: #ffffff;
+  background-color: #ffffff;
+  display: inline-block;
+  width: 40%;
+}
+
+.signUpForm-container{
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}

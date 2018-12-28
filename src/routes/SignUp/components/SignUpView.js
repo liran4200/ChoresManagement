@@ -1,12 +1,13 @@
 import React from 'react';
 import SignUpForm from './SignUpForm';
 import PropTypes from 'prop-types';
+import '../css/SignUpView.scss';
 
 export const SignUpView = (props) => {
     return (
-        <div className = "row">
-            <div className = "col-md-4 col-md-offset-4">
-                <SignUpForm 
+        <div className="signUpView-container">
+          <div className="signUpForm-container">
+                <SignUpForm
                     userSignUpRequest = {props.userSignUpRequest}
                     usersList = {props.users_list}
                     username = {props.username}
@@ -15,9 +16,8 @@ export const SignUpView = (props) => {
                     changeUserNameField = {props.changeUserNameField}
                     changePasswardConfField = {props.changePasswardConfField}
                     changePasswardField = {props.changePasswardField}
-                
                 />
-            </div>
+          </div>
         </div>
     );
 }
