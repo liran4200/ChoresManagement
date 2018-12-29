@@ -18,9 +18,9 @@ export const ChoresView = (props) => {
     return (
         <div className='chore-view_continer'>
             <div>
-                <div>
-                    <button onClick={() => props.showNewModal()}>Create New Chore</button>
-                </div>
+                <button className="btn btn-primary btn-block btn-lg" onClick={() => props.showNewModal()}>Create New Chore</button>
+            </div>
+            <div>
                 <div className='chore-view_space' />
                     <ChoreList
                         title="Unassigned Chores"

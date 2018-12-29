@@ -1,10 +1,13 @@
 .chore-list_continer {
+    display: inline-grid;
     flex: 3;
+    width: 32%;
+    padding: 4px;
 }
 
 .list-title {
     font-size:20px;
-    text-align: center; 
+    text-align: center;
     margin: 0px;
     height: 100px
 }

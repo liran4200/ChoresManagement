@@ -115,7 +115,7 @@ const initialState = {
             "name":             "Kitchen",
             "description":      "Cleaning all the kitchen",
             "createDate":       new Date("2018-12-3"),
-            "expirationDate":   new Date("2018-12-6"),
+            "expirationDate":   new Date("2018-12-31"),
             "roommateName":     "dudu@gmail.com",
             "isRecurring":      false,
             "score":            10,

@@ -45,7 +45,7 @@ export const LoginForm = (props) => {
                   onChange={(e) => props.updatePassword(e.target.value)}>
               </input>
             </div>
-            <button type="submit" className="btn btn-primary">Submit</button>
+            <button type="submit" className="btn btn-primary">Sign In</button>
           </form>
     );
 }
