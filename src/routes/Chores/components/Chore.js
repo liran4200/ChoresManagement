@@ -1,22 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as constants from '../modules/constants'
-import { addNewChore} from '../../../serverCalls/choreAPI'
-import { markAsAssigenedToMe , markAsDone, markAsUnassigene } from '../../../serverCalls/activityAPI'
+import { markAsAssigenedToMe , markAsDone, markAsUnassigene, addNewChore } from '../../../serverCalls/activityAPI'
+import { notifyError } from '../../../components/notify'
 import '../css/Chore.scss';
 
 export const Chore = (props) => {
   // add is reacuring and description
-  const handleClick = (event) => {
-    let roommateName;
-    if(props.roommateName === constants.UNASSIGNED_CHORE){
-      markAsAssigenedToMe(props.id, props.logedinUser)
-    }else if(props.roommateName === props.logedinUser){
-      markAsUnassigene(props.id, props.logedinUser)
-    }else{
-      return
+  const handleClick = async (event) => {
+    try {
+      if(props.roommateName === constants.UNASSIGNED_CHORE){
+        await markAsAssigenedToMe(props.id, props.logedinUser)
+      }else if(props.roommateName === props.logedinUser){
+        await markAsUnassigene(props.id, props.logedinUser)
+      }else{
+        return
+      }
+      await props.updateChoreList(props.logedinUser)  
+    } catch (error) {
+      notifyError(error)
     }
-    props.updateChoreList()
   }
 
   const isExpiredDate = () => {
@@ -28,18 +31,22 @@ export const Chore = (props) => {
     return false;
   }
 
-  const handleClickDone = () => {
-    markAsDone(props.id, props.logedinUser);
-    if(props.isRecurring){
-        console.log("recurring chore!!")
-        //generate afterTomorrow day for recurring chore
-        let tomorrow = props.expirationDate;
-        let afterTomorrow = new Date();
-        afterTomorrow.setDate(tomorrow.getDate() + 1);
-        //add recurring chore
-        addNewChore(props.name, props.logedinUser, afterTomorrow, props.score, props.isRecurring, props.description)
+  const handleClickDone = async () => {
+    try {
+      await markAsDone(props.id, props.logedinUser);
+      if(props.isRecurring){
+          console.log("recurring chore!!")
+          //generate afterTomorrow day for recurring chore
+          let tomorrow = props.expirationDate;
+          let afterTomorrow = new Date();
+          afterTomorrow.setDate(tomorrow.getDate() + 1);
+          //add recurring chore
+          await addNewChore(props.logedinUser, props.name, afterTomorrow, props.score, props.isRecurring, props.description)
+      }
+      await props.loadChorePage(props.logedinUser)  
+    } catch (error) {
+      notifyError(error)
     }
-    props.updateChoreList()
   }
 
   const handleClickEdit = () => {

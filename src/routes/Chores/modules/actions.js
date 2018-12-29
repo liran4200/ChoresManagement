@@ -6,30 +6,48 @@ import { getChoreList } from '../../../serverCalls/choreAPI'
 // Actions
 // ------------------------------------
 export function updateUserListAction(usersList) {
-  console.log(`in updateUserListAction ${JSON.stringify(newChore)}`)
+  console.log(`im in updateUserListAction usersList is ${usersList}`)
   return {
     type: constants.UPDATE_USER_LIST,
     payload: usersList
   }
 }
 
-export function updateChoreListAction(usersList) {
-  console.log(`in updateChoreListAction ${JSON.stringify(newChore)}`)
+export function updateChoreListAction(ChoreList) {
+  console.log(`im in updateChoreListAction ChoreList is ${ChoreList}`)
   return {
     type: constants.UPDATE_CHORE_LIST,
-    payload: usersList
+    payload: ChoreList
   }
 }
 
-export function updateUserList() {
-  return dispatch => {
-    dispatch(updateUserListAction(getUserList()))
+export function updateUserList(email) {
+  console.log(`im in updateUserList`)
+  return async dispatch => {
+    const userList = await getUserList(email)
+    console.log(`im in userList val is ${userList}`)
+    
   }
 }
 
-export function updateChoreList() {
-  return dispatch => {
-    dispatch(updateChoreListAction(getChoreList()))
+export function updateChoreList(email) {
+  console.log(`im in updateChoreList val is ${email}`)
+  return async dispatch => {
+    const ChoreList = await getChoreList(email)
+    console.log(`im in ChoreList val is ${ChoreList}`)
+    dispatch(updateChoreListAction(ChoreList))
+  }
+}
+
+export function loadChorePage(email) {
+  return async dispatch => {
+    const userList = await getUserList(email)
+    console.log(`im in loadChorePage val is ${JSON.stringify(userList)}`)
+    dispatch(updateUserListAction(userList))
+    const ChoreList = await getChoreList(email)
+    console.log(`im in loadChorePage val is ${JSON.stringify(ChoreList)}`)
+    dispatch(updateChoreListAction(ChoreList))
+    dispatch(changePageLoaded(true))
   }
 }
 
@@ -57,6 +75,7 @@ export function hideEditModal() {
 }
 
 export function changePageLoaded(val) {
+  console.log(`im in changePageLoaded val is ${val}`)
   return {
     type: constants.CHANGE_CHORE_PAGE_LOADED,
     payload: val
@@ -90,6 +109,8 @@ export function changeChoreToEditRecurringField(val) {
 }
 
 export function changeChoreToEditScoreField(val) {
+  console.log("aaaaaaaaaaaaaaaaaaa")
+  console.log(val)
   return {
     type: constants.CHANGE_CHORE_TO_EDIT_SCORE,
     payload: val
@@ -99,6 +120,7 @@ export function changeChoreToEditScoreField(val) {
 export const actions = {
   updateUserList,
   updateChoreList,
+  loadChorePage,
   showEditModal,
   showNewModal,
   hideEditModal,

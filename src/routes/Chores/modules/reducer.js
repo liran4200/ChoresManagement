@@ -69,7 +69,7 @@ const ACTION_HANDLERS = {
   [constants.CHANGE_CHORE_TO_EDIT_RECURRING]: (state, action) => {
     return { ...state, choreToEdit: { ...state.choreToEdit, "isRecurring": action.payload } }
   },
-  [constants.CHANGE_CHORE_TO_EDIT_RECURRING]: (state, action) => {
+  [constants.CHANGE_CHORE_TO_EDIT_SCORE]: (state, action) => {
     return { ...state, choreToEdit: { ...state.choreToEdit, "score": action.payload } }
   },
 }

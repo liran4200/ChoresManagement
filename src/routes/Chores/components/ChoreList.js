@@ -21,6 +21,7 @@ export const ChoreList = (props) => {
             isRecurring={chore.isRecurring}
             score={chore.score}
             updateChoreList={props.updateChoreList}
+            loadChorePage={props.loadChorePage}
             showBtnDone={props.showBtnDone}
             showEditModal={props.showEditModal}
             logedinUser={props.logedinUser}

@@ -3,23 +3,27 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router'
 import { registerUser } from '../../../serverCalls/userAPI'
+import { notifySuccess, notifyError } from '../../../components/notify'
 
 export const SignUpForm = (props) => {
-    //TODO: ADD ERRORS
-    const handleSubmit = (e) => {
+    
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if(props.passwordConf != props.password){e
+        if(props.passwordConf != props.password){
+            notifyError("password and confirmation do not match")
             console.log("cant wrong password conf")
             return
         }
         try {
-            user = registerUser(props.username, props.password)
+            let user = await registerUser(props.username, props.password)
+            notifySuccess(`User ${props.username} registered succsfully try to login`)
             props.changeUserNameField("")
             props.changePasswardField("")
             props.changePasswardConfField("")
             browserHistory.push('/')
         } catch (error) {
-            console.error("error in reg user: " + error.message)
+            notifyError(error)
+            console.error("error in reg user: " + error)
         }
     }
 

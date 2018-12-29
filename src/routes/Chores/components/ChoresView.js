@@ -1,29 +1,28 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import ChoreList from './ChoreList'
 import PropTypes from 'prop-types'
 import ChoreModal from './ChoreModal'
 import PieChart from './PieChart'
 import * as constants from '../modules/constants'
 import { browserHistory } from 'react-router'
+import { notifyError } from '../../../components/notify'
 import '../css/ChoreView.scss'
 
 class ChoresView extends Component {
-    // ADD ERRORS
     componentWillMount() {
         if (!this.props.isLogedIn) {
+            notifyError("Please login first, redirecting to login page")
             console.log("user is not logged in!")
             browserHistory.push("/")
         }
         if (!this.props.isPageLoaded) {
-            console.log("im chore view getting users!")
-            this.props.updateUserList()
-            this.props.updateChoreList()
-            this.props.changePageLoaded(true)
+            console.log("im chore view loading!")
+            this.props.loadChorePage(this.props.logedinUser)
         }
     }
 
     render() {
-        console.log(`Im chore view here is my props: ${this.props}`)
+        console.log(`Im chore view here is my props: ${JSON.stringify(this.props)}`)
         if (!this.props.isPageLoaded) {
             return (<div />)
         }
@@ -45,6 +44,7 @@ class ChoresView extends Component {
                         title="Unassigned Chores"
                         chores={unassignedChoresList}
                         updateChoreList={this.props.updateChoreList}
+                        loadChorePage={this.props.loadChorePage}
                         showBtnDone={false}
                         logedinUser={this.props.logedinUser}
                         showEditModal={this.props.showEditModal}
@@ -53,6 +53,7 @@ class ChoresView extends Component {
                         title="My Chores"
                         chores={assignedToMeChoresList}
                         updateChoreList={this.props.updateChoreList}
+                        loadChorePage={this.props.loadChorePage}
                         showBtnDone={true}
                         logedinUser={this.props.logedinUser}
                         showEditModal={this.props.showEditModal}
@@ -61,6 +62,7 @@ class ChoresView extends Component {
                         title="Assigned Chores"
                         chores={assignedToOthersChoresList}
                         updateChoreList={this.props.updateChoreList}
+                        loadChorePage={this.props.loadChorePage}
                         showBtnDone={false}
                         logedinUser={this.props.logedinUser}
                         showEditModal={this.props.showEditModal}
@@ -68,7 +70,7 @@ class ChoresView extends Component {
                     <div className='chore-view_space' />
                 </div>
                 <PieChart
-                    usersList={this.props.usersList}
+                    usersList={this.props.userList}
                 />
                 <div>
                 </div>
@@ -77,6 +79,7 @@ class ChoresView extends Component {
                     hideEditModal={this.props.hideEditModal}
                     choreToEdit={this.props.choreToEdit}
                     updateChoreList={this.props.updateChoreList}
+                    logedinUser={this.props.logedinUser}
                     changeChoreToEditNameField={this.props.changeChoreToEditNameField}
                     changeChoreToEditDescriptionField={this.props.changeChoreToEditDescriptionField}
                     changeChoreToEditExpirationField={this.props.changeChoreToEditExpirationField}
@@ -88,13 +91,14 @@ class ChoresView extends Component {
     }
 }
 
-ChoresView.prototype = {
+ChoresView.Prototype = {
     choresList: PropTypes.array,
     shouldShowEditChoreModal: PropTypes.boolean,
     logedinUser: PropTypes.string,
     userList: PropTypes.array,
     choreToEdit: PropTypes.object,
     isPageLoaded: PropTypes.boolean,
+    isLogedIn: PropTypes.boolean,
     updateUserList: PropTypes.func,
     updateChoreList: PropTypes.func,
     showEditModal: PropTypes.func,

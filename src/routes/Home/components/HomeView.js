@@ -2,15 +2,23 @@ import React, { Component } from 'react';
 import LoginForm from './LoginForm';
 import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router'
+import { notifyError } from '../../../components/notify'
 import '../css/HomeView.scss';
 
 class HomeView extends Component {
   componentWillMount(){
+    if(this.props.isLogedIn){
+      notifyError("You are logged in, redirecting you to chores dashboard")
+      console.log("redirecting to /chores")
+      browserHistory.push('/chores')
+    }
+  }
+
+  componentDidUpdate(){
+      console.log(`in will update ${this.props.isLogedIn}`)
       if(this.props.isLogedIn){
-        console.log(`logining out user : ${this.props.email}`)
-        this.props.updateIsLogin(false)
-        this.props.updateEmail("")
-        this.props.updatePassword("")
+        console.log("redirecting to /chores")
+        browserHistory.push('/chores')
       }
   }
   

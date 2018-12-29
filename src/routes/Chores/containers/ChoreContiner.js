@@ -20,6 +20,7 @@ const mapStateToProps = (state) => (
         logedinUser: state.home.email,
         userList: state.chores.userList,
         isPageLoaded: state.chores.isPageLoaded,
+        isLogedIn: state.home.isLogedIn,
     }
 )
 

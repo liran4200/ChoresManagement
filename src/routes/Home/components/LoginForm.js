@@ -1,23 +1,22 @@
 import '../css/HomeView.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { browserHistory } from 'react-router'
 import { loginFunc } from '../../../serverCalls/userAPI'
+import { notifySuccess, notifyError } from '../../../components/notify'
 
 export const LoginForm = (props) => {
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      loginFunc(props.email, props.password)
+      await loginFunc(props.email, props.password)
       console.log("im in login function user exist")
-      this.props.updateIsLogin(true)
-      browserHistory.push('/chores')
+      notifySuccess(`Logged in successfully`)
+      props.updateIsLogin(true)
     } catch (error) {
-      console.log("im in login function, error login: " + error.message)
+      notifyError(error)
       props.updateEmail("")
       props.updatePassword("")  
-
     }
   }
   

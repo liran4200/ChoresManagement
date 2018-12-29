@@ -1,7 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactModal from 'react-modal';
-import { editChore, addNewChore } from '../../../serverCalls/choreAPI'
+import { addNewChore, editChore } from '../../../serverCalls/activityAPI'
+import { notifyError } from '../../../components/notify'
+
 import '../css/ChoreModal.scss';
 
 export const ChoreModal = (props) => {
@@ -13,7 +15,9 @@ export const ChoreModal = (props) => {
     let dd = props.choreToEdit.expirationDate.getDate()
     let mm = props.choreToEdit.expirationDate.getMonth()+1
     let yyyy = props.choreToEdit.expirationDate.getFullYear()
-
+    if(!dd || !mm || !yyyy){
+      return -1
+    }
     if(dd<10){
       dd = `0${dd}`
     }else{
@@ -29,16 +33,31 @@ export const ChoreModal = (props) => {
 
   const expiredDateString = (props.choreToEdit.expirationDate != null) ? handelDate(props.choreToEdit.expirationDate) : null
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
+    console.log("expiredDateString")
+    console.log(expiredDateString)
     e.preventDefault()
+    if(props.choreToEdit.name == ""){
+      notifyError("You must fill all the fields, name is empty")
+      return
+    }else if(props.choreToEdit.description == ""){
+      notifyError("You must fill all the fields, name is description")
+      return
+    }else if(props.choreToEdit.score < 0){
+      notifyError("Score can't be negative")
+      return
+    }else if(expiredDateString < 0){
+      notifyError("Must chose an expiration date")
+      return
+    }
     if(props.choreToEdit.id == "newChore"){
-      addNewChore(props.choreToEdit.name, props.choreToEdit.roommateName, expiredDateString, 0,
+      await addNewChore(props.logedinUser, props.choreToEdit.name, expiredDateString, props.choreToEdit.score,
         props.choreToEdit.isRecurring, props.choreToEdit.description)
     }else{
-      editChore(props.choreToEdit.id, props.choreToEdit.name, props.choreToEdit.roommateName,
-        expiredDateString, props.choreToEdit.score, props.choreToEdit.isRecurring, props.choreToEdit.description)
+      await editChore(props.logedinUser, props.choreToEdit.id, props.choreToEdit.name, expiredDateString,
+        props.choreToEdit.score, props.choreToEdit.description, props.choreToEdit.isRecurring, props.choreToEdit.roommateName)
     }
-    props.updateChoreList()
+    props.updateChoreList(props.logedinUser)
     props.hideEditModal()
   }
 
@@ -46,7 +65,7 @@ export const ChoreModal = (props) => {
   return (
       <ReactModal isOpen={props.shouldShowEditChoreModal} className="Modal">
       <div className="edit-modal-container">
-        <div className="edit-modal-title"> Edit Chore </div>
+        <div className="edit-modal-title"> {props.choreToEdit.id == "newChore" ? "New Chore" : "Edit Chore"} </div>
         <form className="edit-modal-chore-container" onSubmit={ handleSubmit }>
           <label>name:
           <input type="text" className="edit-modal-chore-name" onChange={(e)=>props.changeChoreToEditNameField(e.target.value)} value={props.choreToEdit.name}/>
@@ -79,6 +98,13 @@ ChoreModal.prototype = {
   shouldShowEditChoreModal: PropTypes.boolean,
   hideEditModal: PropTypes.func,
   choreToEdit: PropTypes.object,
+  updateChoreList: PropTypes.func,
+  logedinUser: PropTypes.string,
+  changeChoreToEditNameField: PropTypes.func,
+  changeChoreToEditDescriptionField: PropTypes.func,
+  changeChoreToEditExpirationField: PropTypes.func,
+  changeChoreToEditRecurringField: PropTypes.func,
+  changeChoreToEditScoreField: PropTypes.func,
 }
 
 export default ChoreModal;
