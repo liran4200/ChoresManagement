@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { createChore } from '../routes/Chores/modules/reducer'
 
 const BASE_URL = 'http://localhost:8080/playground/activities/'
 const USER_PLAY_GROUND = "ChoresManagement"
@@ -6,7 +7,7 @@ const PLAY_GROUND = "2019A.yuri"
 const TYPE_MarkAsAssigened = "MarkAsAssigened";
 const TYPE_MarkAsDone ="MarkAsDone";
 const TYPE_MarkAsUnassigened ="MarkAsUnassigened";
-const TYPE_GetActivityHistoryBoard ="GetActivityHistoryBoard";
+const TYPE_GetChoreElements ="GetChoreElements";
 const TYPE_GetScoreBoard = "GetScoreBoard"
 
 const postRequest = (addUrl, data) => ({ 
@@ -76,6 +77,36 @@ export const markAsUnassigene = async (id, playerEmail) => {
     }
 }
 
+export const getChoreList = async (playerEmail) => {
+    try {
+        const activity = {
+            "type":TYPE_GetChoreElements,
+        }
+        const res = await axios(postRequest(`${USER_PLAY_GROUND}/${playerEmail}`,activity))
+        console.log(JSON.stringify(res))
+        let arrayToReturn = res.data
+        arrayToReturn = arrayToReturn.map(
+            (chore) => {
+                    return (
+                        createChore(
+                            chore.id,
+                            chore.name,
+                            chore.attributes.Description,
+                            new Date(chore.creationDate),
+                            new Date(chore.expirationDate),
+                            (chore.attributes["Assigned to"]=="") ? "":chore.attributes["Assigned to"].split('$$')[1],
+                            chore.attributes.IS_RECURRING,
+                            chore.attributes.Score
+                        )
+                    )
+                }
+        )
+        return arrayToReturn
+    } catch (error) {
+        throw `error getting chores ${error}`
+    }
+}
+
 export const getUserList = async (playerEmail) => {
     try {
         const activity = {
@@ -139,12 +170,13 @@ export const editChore = async (playerEmail, id, name, expirationDate, score, de
                     "Score": score,
                     "Description": description,
                     "IS_RECURRING": isRecurring,
-                    "Assigned to": assigened
+                    "Assigned to": `${USER_PLAY_GROUND}$$${assigened}`
                 }
             }
         }
     }
     const res = await axios(postRequest(`${USER_PLAY_GROUND}/${playerEmail}`,activity))
+    console.log("in edit res is")
     console.log(JSON.stringify(res))
     return {
         "id": res.data.id,

@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { createChore } from '../routes/Chores/modules/reducer'
 
 const BASE_URL = 'http://localhost:8080/playground/elements/'
 const USER_PLAY_GROUND = "ChoresManagement"
@@ -24,26 +23,3 @@ const getRequest = (addUrl) => ({
     },
     url: BASE_URL + addUrl,
 })
-
-export const getChoreList = async (email) => {
-    const res = await axios(getRequest(`${USER_PLAY_GROUND}/${email}/search/type/chore`))
-    let arrayToReturn = res.data
-    arrayToReturn = arrayToReturn.filter((chore)=>(chore.attributes.Status != "Done"))
-    arrayToReturn = arrayToReturn.map(
-        (chore) => {
-                return (
-                    createChore(
-                        chore.id,
-                        chore.name,
-                        chore.attributes.Description,
-                        new Date(chore.creationDate),
-                        new Date(chore.expirationDate),
-                        (chore.attributes["Assigned to"]=="") ? "":chore.attributes["Assigned to"].split('$$')[1],
-                        chore.attributes.IS_RECURRING,
-                        chore.attributes.Score
-                    )
-                )
-            }
-    )
-    return arrayToReturn
-}

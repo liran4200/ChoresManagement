@@ -13,8 +13,8 @@ class SignUpView extends Component {
 
     render() {
         return (
-            <div className = "row">
-                <div className = "col-md-4 col-md-offset-4">
+            <div className="signUpView-container">
+                <div className="signUpForm-container">
                     <SignUpForm 
                         username = {this.props.username}
                         password = {this.props.password}

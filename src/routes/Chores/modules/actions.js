@@ -1,6 +1,5 @@
 import * as constants from './constants'
-import { getUserList } from '../../../serverCalls/activityAPI'
-import { getChoreList } from '../../../serverCalls/choreAPI'
+import { getUserList, getChoreList } from '../../../serverCalls/activityAPI'
 
 // ------------------------------------
 // Actions

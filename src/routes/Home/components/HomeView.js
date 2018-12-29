@@ -25,9 +25,9 @@ class HomeView extends Component {
   render() {
     console.log(`im HomeView in props ${JSON.stringify(this.props)}`)
     return (
-      <div>
-        <div className='login-space' />
+      <div className="homeView-container">
         <div className='login-continer'>
+          <h5 className="card-title text-center">Sign In</h5>
           <LoginForm
             email={this.props.email}
             password={this.props.password}
@@ -35,7 +35,7 @@ class HomeView extends Component {
             updatePassword={this.props.updatePassword}
             updateIsLogin={this.props.updateIsLogin}
           />
-          <div>
+          <div className="panel-footer">
             <div>Don't have an account ?</div>
             <a href="./signUp">Sign Up!</a>
           </div>

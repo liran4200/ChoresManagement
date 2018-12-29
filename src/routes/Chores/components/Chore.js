@@ -56,42 +56,46 @@ export const Chore = (props) => {
 
   //defualt background
   let backgroundExpiredDate = '';
-  let backgroundChoreItem = '#00eeff';
+  let backgroundChoreItem = '#5f9ea0';
   if(isExpiredDate()){
     //red
     backgroundChoreItem = '#FF0000';
     //white
-    backgroundExpiredDate = '#ffffff';
+    backgroundExpiredDate = '#6C757C';
   }
 
   const btnDoneItem = props.showBtnDone?
-                        (<li>
-                          <button onClick= { (event) => handleClickDone()}>
-                            Done
-                          </button>
-                        </li> )  : ( null );
+                        (<button type="button"
+                                 className="btn btn-secondary"
+                                 onClick= { (event) => handleClickDone()}>
+                                 Done </button>)  : ( null );
 
   return (
-    <div className="chore-item" style={{background: backgroundChoreItem}} >
-      <div onClick={(event)=>handleClick(event)}>
-          <div className="title">
-            <div className="chore-name">{props.name}</div>
-          </div>
-          <div className="chore-description">{props.description}</div>
-          <div className="roommate-name">assigned to: {props.roommateName}</div>
-          <div
-                style={{background: backgroundExpiredDate}}
-                className="expiration-date">Expiration Date: {props.expirationDate.toLocaleDateString("en-IL")}
-          </div>
-      </div>
-      <div className="footer-menu">
-            <ul className="list-menu">
-                {btnDoneItem}
-                <li>
-                  <button onClick= {(event) => handleClickEdit()}>Edit</button>
-                </li>
-            </ul>
-      </div>
+    <div className="card mb-3"
+          style={{
+            maxWidth:'18rem',
+            background: backgroundChoreItem}}>
+        <div onClick={(event)=>handleClick(event)}>
+            <div className="card-header bg-transparent"><h5>{props.name}</h5></div>
+            <div className="card-body">
+                <p className="card-text">{props.description}</p>
+                <h4>assigned to: {props.roommateName}</h4>
+                <h5 className="card-title"
+                      style={{background: backgroundExpiredDate}}>
+                      Expiration Date: {props.expirationDate.toLocaleDateString("en-IL")}
+                </h5>
+            </div>
+        </div>
+        <div className="card-footer bg-transparent ">
+            <div className="btn-group" role="group" aria-label="Basic example">
+              <button type="button"
+                      className="btn btn-secondary"
+                      onClick= {(event) => handleClickEdit()}>
+                      Edit
+              </button>
+              {btnDoneItem}
+            </div>
+        </div>
     </div>
   );
 }
