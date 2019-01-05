@@ -2,11 +2,11 @@ import axios from 'axios'
 import { createChore } from '../routes/Chores/modules/reducer'
 
 const BASE_URL = 'http://localhost:8080/playground/activities/'
-const USER_PLAY_GROUND = "ChoresManagement"
+const USER_PLAY_GROUND = "2019A.yuri"
 const PLAY_GROUND = "2019A.yuri"
 const TYPE_MarkAsAssigened = "MarkAsAssigened";
 const TYPE_MarkAsDone ="MarkAsDone";
-const TYPE_MarkAsUnassigened ="MarkAsUnassigened";
+const TYPE_MarkAsUnassigened ="MarkAsUnassigned";
 const TYPE_GetChoreElements ="GetChoreElements";
 const TYPE_GetScoreBoard = "GetScoreBoard"
 

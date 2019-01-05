@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router'
 import { registerUser } from '../../../serverCalls/userAPI'
 import { notifySuccess, notifyError } from '../../../components/notify'
+import '../css/SignUpForm.scss'
 
 export const SignUpForm = (props) => {
     
